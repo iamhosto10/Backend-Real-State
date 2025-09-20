@@ -1,0 +1,47 @@
+{
+  "info": {
+    "name": "Million RealEstate - sample",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "List properties",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:5000/api/properties?name=casa&page=1&pageSize=10",
+          "host": [
+            "http://localhost:5000"
+          ],
+          "path": [
+            "api",
+            "properties"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "casa"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get property by id",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:5000/api/properties/1",
+          "host": [
+            "http://localhost:5000"
+          ],
+          "path": [
+            "api",
+            "properties",
+            "1"
+          ]
+        }
+      }
+    }
+  ]
+}
