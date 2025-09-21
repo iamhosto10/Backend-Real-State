@@ -6,7 +6,11 @@ using MongoDB.Driver;
 var builder = WebApplication.CreateBuilder(args);
 
 // Mongo settings
-builder.Services.Configure<MongoSettings>(builder.Configuration.GetSection("MongoSettings"));
+builder.Services.Configure<MongoSettings>(options =>
+{
+    options.ConnectionString = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING") ?? "";
+    options.DatabaseName = Environment.GetEnvironmentVariable("MONGO_DATABASE") ?? "RealEstateDb";
+});
 builder.Services.AddSingleton<IMongoClient>(sp =>
 {
     var settings = sp.GetRequiredService<IOptions<MongoSettings>>().Value;

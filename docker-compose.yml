@@ -15,10 +15,14 @@ services:
     depends_on:
       - mongo
     ports:
-      - "8080:8080"
+      - "8080:80"
+    # environment:
+    #   - MongoSettings__ConnectionString=mongodb://mongo:27017
+    #   - MongoSettings__DatabaseName=million_realestate
+    env_file:
+      - .env
     environment:
-      - MongoSettings__ConnectionString=mongodb://mongo:27017
-      - MongoSettings__DatabaseName=million_realestate
+      - ASPNETCORE_URLS=http://+:80
 
 volumes:
   mongo-data:

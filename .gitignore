@@ -6,3 +6,6 @@ obj/
 *.suo
 *.zip
 **/backup/*.gz
+
+.env
+.env.local

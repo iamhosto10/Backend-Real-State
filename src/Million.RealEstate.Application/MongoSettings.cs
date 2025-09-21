@@ -2,8 +2,8 @@ namespace Million.RealEstate.Application;
 
 public class MongoSettings
 {
-    public string ConnectionString { get; set; } = "mongodb://localhost:27017";
-    public string DatabaseName { get; set; } = "million_realestate";
+    public string ConnectionString { get; set; } = string.Empty;
+    public string DatabaseName { get; set; } = string.Empty;
 
     // Colecciones
     public string OwnersCollectionName { get; set; } = "owners";
