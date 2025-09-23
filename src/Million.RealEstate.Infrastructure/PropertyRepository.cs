@@ -23,7 +23,18 @@ public class PropertyRepository : IPropertyRepository
 
     public async Task<Property?> GetByIdAsync(string id, CancellationToken ct = default) =>
         await _col.Find(x => x.IdProperty == id).FirstOrDefaultAsync(ct);
+    public async Task<Property?> GetByNameAsync(string name, CancellationToken ct = default) =>
+        await _col.Find(x => x.Name == name).FirstOrDefaultAsync(ct);
+    public async Task<Property?> GetByAddressAsync(string address, CancellationToken ct = default) =>
+        await _col.Find(x => x.Address == address).FirstOrDefaultAsync(ct);
+    public async Task<List<Property>> GetByPriceRangeAsync(decimal minPrice, decimal maxPrice, CancellationToken ct = default)
+    {
+        int min = (int)Math.Floor(minPrice);
+        int max = (int)Math.Ceiling(maxPrice);
+        var filter = Builders<Property>.Filter.Where(p => p.Price >= min && p.Price <= max);
 
+        return await _col.Find(filter).ToListAsync(ct);
+    }
     public async Task<List<Property>> GetAllAsync(CancellationToken ct = default) =>
         await _col.Find(Builders<Property>.Filter.Empty).ToListAsync(ct);
 

@@ -25,6 +25,24 @@ public class PropertiesController : ControllerBase
         if (property == null) return NotFound();
         return Ok(property);
     }
+    [HttpGet("by-name/{name}")]
+    public async Task<IActionResult> GetByName(string name, CancellationToken ct)
+    {
+        var propertie = await _repo.GetByNameAsync(name, ct);
+        return Ok(propertie);
+    }
+    [HttpGet("by-address/{address}")]
+    public async Task<IActionResult> GetByAddress(string address, CancellationToken ct)
+    {
+        var propertie = await _repo.GetByAddressAsync(address, ct);
+        return Ok(propertie);
+    }
+    [HttpGet("by-price")]
+    public async Task<IActionResult> GetByPriceRange([FromQuery] decimal minPrice, [FromQuery] decimal maxPrice, CancellationToken ct)
+    {
+        var properties = await _repo.GetByPriceRangeAsync(minPrice, maxPrice, ct);
+        return Ok(properties);
+    }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Property property, CancellationToken ct)
@@ -51,8 +69,8 @@ public class PropertiesController : ControllerBase
     [HttpGet("by-owner/{ownerID}")]
     public async Task<IActionResult> GetByProperty(string ownerId, CancellationToken ct)
     {
-        var properties = await _repo.GetByOwnerAsync(ownerId, ct);
-        return Ok(properties);
+        var propertie = await _repo.GetByOwnerAsync(ownerId, ct);
+        return Ok(propertie);
     }
 
 }
